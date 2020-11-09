@@ -12,3 +12,5 @@ It's done by khushi
 
 
 https://join.slack.com/t/thespecialcharacter/shared_invite/zt-iyso18gz-VwoNVAktsPXrtbSi8eYKmg
+
+https://discord.gg/Mg5ZFhY8
