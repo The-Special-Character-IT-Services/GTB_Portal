@@ -1,3 +1,5 @@
-const a = 'Work  Hard'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-console.log(a)
+ReactDOM.render(<App greet="Hello" message="Okay" />, document.getElementById('root'));

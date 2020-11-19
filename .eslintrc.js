@@ -1,7 +1,8 @@
-module exports = {
+module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
   parser: 'babel-eslint',
   extends: [
@@ -18,9 +19,10 @@ module exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react','import','jsx-a11y','prettier','react','react-hooks'
-  ],
+  plugins: ['react', 'import', 'jsx-a11y', 'prettier', 'react', 'react-hooks'],
+
   rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'arrow-parens': [1, 'as-needed'],
   },
 };
