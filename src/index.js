@@ -1,12 +1,8 @@
-import app from './app';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ClassApp from './ClassApp';
 
-console.log(app.greet);
-console.log(app.greet1);
-
-const x = 'hello';
-console.log('x', x);
-
-console.log('How are you');
-
-const a = 'asdf';
-console.log('a', a);
+ReactDOM.render(
+  <ClassApp greet="how are you?" message="i am fine" />,
+  document.getElementById('root'),
+);

@@ -20,5 +20,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', 'prettier', 'import', 'jsx-a11y', 'react-hooks'],
-  rules: {},
+  rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'arrow-parens': [1, 'as-needed'],
+  },
 };

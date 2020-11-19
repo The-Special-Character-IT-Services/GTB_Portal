@@ -1,7 +1,22 @@
-const greet = 'Hello';
-const greet1 = 'How are you?';
+// function component
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default {
-  greet,
-  greet1,
+const App = ({ greet, message }) => (
+  <div>
+    <h1>{greet}</h1>
+    <h1>{message}</h1>
+    <input type="text" />
+  </div>
+);
+
+App.propTypes = {
+  greet: PropTypes.string.isRequired,
+  message: PropTypes.string,
 };
+
+App.defaultProps = {
+  message: 'fine',
+};
+
+export default App;
