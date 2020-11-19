@@ -20,7 +20,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react','import','jsx-a11y','prettier','react-hooks',
+    'react','import','jsx-a11y','prettier','react ','react-hooks',
   ],
   rules: {
   },

@@ -1,3 +1,3 @@
 console.log('asdadaf')
-var a = 'cwdcwdx
-            let b = 'adadja
+var a = akjs
+let b = ajka
