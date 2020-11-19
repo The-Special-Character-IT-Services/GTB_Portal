@@ -1,0 +1,10 @@
+
+    {
+        "javascript.format.enable": false,
+        "javascript.validate.enable": false,
+        "[javascript]": { "editor.formatOnSave": true },
+        "emmet.includeLanguages": {
+          "javascript": "javascriptreact",
+          "vue-html": "html"
+        }
+      }
