@@ -9,7 +9,7 @@ const App = ({ greet, message }) => (
   </div>
 );
 
-App.prototypes = {
+App.propTypes = {
   greet: PropTypes.string.isRequired,
   message: PropTypes.string,
 };

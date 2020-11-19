@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import ClassApp from './classPrac';
 
-ReactDOM.render(<App greet="Hello" message="Okay" />, document.getElementById('root'));
+ReactDOM.render(
+  <ClassApp greet="Hello" message="Welcome to My Website" />,
+  document.getElementById('root'),
+);
