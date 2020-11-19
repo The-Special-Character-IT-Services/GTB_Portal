@@ -6,7 +6,6 @@ module.exports = {
   },
   parser: 'babel-eslint',
   extends: [
-    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
     'prettier/react',
@@ -21,5 +20,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', 'jsx-a11y', 'import', 'react', 'prettier', 'react-hooks'],
-  rules: {},
+  rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'arrow-parens': [1, 'as-needed'],
+  },
 };
