@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// prop value change
+
 const App = ({ greet, message }) => (
   <div>
     <h1>{greet}</h1>
