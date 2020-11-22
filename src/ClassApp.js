@@ -14,7 +14,15 @@ import PropTypes from 'prop-types';
 // -> getDerivedStateFromProps
 // -> shouldComponentUpdate
 // -> render
+// -> getSnapshotBeforeUpdate
 // -> componentDidUpdate
+
+// unmounting
+// -> componentWillUnmount
+
+// error handling
+// -> getDerivedStateFromError
+// -> componentDidCatch
 
 export default class ClassApp extends Component {
   static propTypes = {
@@ -55,15 +63,38 @@ export default class ClassApp extends Component {
 
   componentDidMount() {
     // call only 1nce
+    // throw ne Error('err');
     console.log('componentDidMount');
     console.log(document.getElementById('btn'));
-    document.addEventListener('copy', data => {
-      console.log(data);
-    });
+    // document.addEventListener('mousemove', data => {
+    //   console.log(data);
+    // });
+    this.timer = setTimeout(() => {
+      console.log('hello');
+    }, 10000);
+
     // api call
   }
 
-  componentDidUpdate(prevProps, prevState) {}
+  static getSnapshotBeforeUpdate() {
+    return 10;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {}
+
+  componentWillUnmount() {
+    // document.removeEventListener('mousemove');
+    // clearTimeout(this.timer);
+  }
+
+  static getDerivedStateFromError(error) {
+    return {};
+  }
+
+  componentDidCatch(error, info) {
+    // save on serve
+    // logComponentStackToMyService(info.componentStack);
+  }
 
   onClick = () => {
     this.setState({
