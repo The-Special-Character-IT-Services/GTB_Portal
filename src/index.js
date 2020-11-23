@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ClassApp from './ClassApp';
+import Todo from './Todo';
+import './index.css';
+import './tailwind.css';
 
-ReactDOM.render(
-  <ClassApp greet="how are you?" message="i am fine" />,
-  document.getElementById('root'),
-);
+ReactDOM.render(<Todo />, document.getElementById('root'));

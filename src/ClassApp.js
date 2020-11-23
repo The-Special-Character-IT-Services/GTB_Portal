@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Child1 from './Child1';
 import Child2 from './Child2';
+import './app.css';
 
 // props value change
 // stae valuee change
