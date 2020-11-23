@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Child1 from './child1';
+import Child2 from './child2';
 
 // This is of mounting lifecycle
 // constructor
@@ -11,7 +13,15 @@ import PropTypes from 'prop-types';
 // getDerivedStateFromProps
 // shouldComponentUpdate
 // render
+// getSnapshotBeforeUpdate
 // componentDidUpdate
+
+// unmounting
+// componentWillUnmount
+
+// error handling
+// getDerivedStateFromError
+// componentDidCatch
 
 export default class ClassApp extends Component {
   static propTypes = {
@@ -32,12 +42,18 @@ export default class ClassApp extends Component {
       string: props.greet,
       string1: props.message,
       textvalue: '',
+      user: {
+        firstname: 'Raj',
+      },
+      user2: {
+        lastname: 'Patel',
+      },
     };
-    console.log('in Constructor', props);
+    // console.log('in Constructor', props);
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('getDerivedStateFromProps', props, state);
+    // console.log('getDerivedStateFromProps', props, state);
     return {
       ...state,
       myname: props.greet ? 'Raj' : '',
@@ -45,25 +61,57 @@ export default class ClassApp extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
-    console.log(document.getElementById('btn'));
+    // console.log('component did Mount');
+    // console.log(document.getElementById('btn'));
     document.addEventListener('copy', data => {
       console.log(data);
     });
+    // this.timer = setTimeout(() => {
+    //   console.log('====================================');
+    //   console.log('Hello');
+    //   console.log('====================================');
+    // }, 5000);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.textvalue !== '') {
+    if (nextState.textvalue !== 'noob') {
       return true;
     }
     return false;
   }
 
+  getSnapshotBeforeUpdate() {
+    return 5;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {}
+
+  componentWillUnmount() {
+    document.removeEventListener('copy');
+    clearTimeout(this.timer);
+  }
+
+  static getDerivedStateFromError(error) {
+    return {};
+  }
+
+  componentDidCatch(error, info) {
+    // save on serve
+    logComponentStackToMyService(info.componentStack);
+  }
+
   onPress = () => {
+    this.state.user2.lastname = 'Clerk';
     this.setState({
-      string: 'S0 changed',
-      string1: 'S1 changed',
+      // immutably done
+      user: { ...this.user, firstname: 'Micheal' },
+      // mutably done
+      user2: this.state.user2,
     });
+    // this.setState({
+    //   string: 'S0 changed',
+    //   string1: 'S1 changed',
+    // });
     // alert(this.state.textvalue);
   };
 
@@ -76,13 +124,13 @@ export default class ClassApp extends Component {
   render() {
     console.log('In Render');
     const { greet, message } = this.props;
-    const { string, string1, textvalue, myname } = this.state;
+    const { string, string1, textvalue, myname, user, user2 } = this.state;
     return (
       <div>
-        <h1>{string}</h1>
+        {/* <h1>{string}</h1>
         <h1>{string1}</h1>
         <h1>{myname}</h1>
-        {/* <h1
+        <h1
           style={{
             color: 'red',
             backgroundColor: 'blue',
@@ -96,6 +144,11 @@ export default class ClassApp extends Component {
           }}>
           {message}
         </h1> */}
+        <h1>{user.firstname}</h1>
+        <h1>{user2.lastname}</h1>
+        <Child1 data={user} />
+        <Child2 />
+        <br />
         Login here
         <input type="text" value={textvalue} onChange={this.onChangeString} />
         <button id="btn" type="button" onClick={this.onPress}>
