@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 
 export default class index extends Component {
-  //   static propTypes = {
-  //     prop: PropTypes,
-  //   };
+  static propTypes = {};
+
+  state = {};
 
   render() {
     return (
@@ -17,7 +17,9 @@ export default class index extends Component {
                 className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-900"
                 placeholder="Add Todo"
               />
-              <button className="flex-no-shrink p-2 border-2 rounded text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900">
+              <button
+                type="button"
+                className="flex-no-shrink p-2 border-2 rounded text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900">
                 Add
               </button>
             </div>
@@ -25,10 +27,14 @@ export default class index extends Component {
           <div>
             <div className="flex mb-4 items-center">
               <p className="w-full text-gray-900">Add another component to Tailwind Components</p>
-              <button className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green-900 border-green-900 hover:bg-green-900">
+              <button
+                type="button"
+                className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green-900 border-green-900 hover:bg-green-900">
                 Done
               </button>
-              <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-900 border-red-900 hover:text-white hover:bg-red-900">
+              <button
+                type="button"
+                className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-900 border-red-900 hover:text-white hover:bg-red-900">
                 Remove
               </button>
             </div>
@@ -36,10 +42,14 @@ export default class index extends Component {
               <p className="w-full line-through text-green">
                 Submit Todo App Component to Tailwind Components
               </p>
-              <button className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-gray-900 border-gray-900 hover:bg-gray-900">
+              <button
+                type="button"
+                className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-gray-900 border-gray-900 hover:bg-gray-900">
                 Not Done
               </button>
-              <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-900 border-red-900 hover:text-white hover:bg-red-900">
+              <button
+                type="button"
+                className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-900 border-red-900 hover:text-white hover:bg-red-900">
                 Remove
               </button>
             </div>

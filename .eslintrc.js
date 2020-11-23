@@ -23,6 +23,25 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'arrow-parens': [1, 'as-needed'],
-    'react/state-in-constructor': [true, 'never'],
+    'react/state-in-constructor': [1, 'never'],
+    'react/static-property-placement': [
+      'error',
+      'property assignment',
+      {
+        childContextTypes: 'static getter',
+        contextTypes: 'static public field',
+        contextType: 'static public field',
+        displayName: 'static public field',
+        propTypes: 'static public field',
+        defaultProps: 'static public field',
+      },
+    ],
+    'react/jsx-closing-bracket-location': [
+      'error',
+      {
+        nonEmpty: 'after-props',
+        selfClosing: 'tag-aligned',
+      },
+    ],
   },
 };

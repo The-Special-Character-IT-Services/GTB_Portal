@@ -9,8 +9,8 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open 'google chrome'",
-    "eslint": "eslint ./src",
-    "eslint:fix": "eslint ./src --fix"
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
