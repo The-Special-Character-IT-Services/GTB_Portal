@@ -36,6 +36,9 @@ module.exports = {
         defaultProps: 'static public field',
       },
     ],
+    'react/jsx-props-no-spreading': 0,
+    'react/button-has-type': 0,
+    'object-curly-newline': 0,
     'react/jsx-closing-bracket-location': [
       'error',
       {
