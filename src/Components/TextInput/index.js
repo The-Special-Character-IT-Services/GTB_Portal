@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const index = ({ ...rest }) => (
-  <input
-    {...rest}
-    className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-900"
-  />
-);
+const index = ({ ...rest }) => {
+  console.log('Input Text Component');
+  return (
+    <input
+      {...rest}
+      className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-900"
+    />
+  );
+};
 
-export default index;
+export default memo(index);

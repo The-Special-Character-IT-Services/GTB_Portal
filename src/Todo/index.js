@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import classnames from 'classnames';
 import Button from '../Components/Button';
 import TextInput from '../Components/TextInput';
 // import PropTypes from 'prop-types';
 
-export default class index extends Component {
+export default class index extends PureComponent {
   static propTypes = {};
 
   state = {
     todoList: [],
     todoText: '',
+    status: 'all',
   };
 
   onChangeText = event => {
@@ -17,15 +19,17 @@ export default class index extends Component {
     });
   };
 
-  onAddTodo = () => {
+  onAddTodo = event => {
+    event.preventDefault();
     const { todoList, todoText } = this.state;
     this.setState({
-      todoList: [...todoList, { text: todoText, isDone: false, id: new Date().valueOf() }],
+      todoList: [{ text: todoText, isDone: false, id: new Date().valueOf() }, ...todoList],
       todoText: '',
+      status: 'all',
     });
   };
 
-  completeTodo = id => {
+  onCompleteTodo = id => {
     const { todoList } = this.state;
     const i = todoList.findIndex(x => x.id === id);
     this.setState({
@@ -37,35 +41,69 @@ export default class index extends Component {
     });
   };
 
+  deleteTodo = id => {
+    const { todoList } = this.state;
+    const i = todoList.findIndex(x => x.id === id);
+    this.setState({
+      todoList: [...todoList.slice(0, i), ...todoList.slice(i + 1)],
+    });
+  };
+
+  filter = event => {
+    this.setState({
+      status: event.target.name,
+    });
+  };
+
   render() {
-    const { todoText, todoList } = this.state;
+    const { todoText, todoList, status } = this.state;
     return (
       <div className="h-screen w-full flex justify-center items-center bg-teal-100 font-sans">
         <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-2/3 lg:max-w-lg">
           <div className="mb-4">
             <h1 className="text-gray-900">Todo List</h1>
-            <div className="flex mt-4">
+            <form className="flex mt-4" onSubmit={this.onAddTodo}>
               <TextInput value={todoText} onChange={this.onChangeText} />
-              <Button onClick={this.onAddTodo}>Add Todo</Button>
-            </div>
+              <Button type="submit">Add Todo</Button>
+            </form>
           </div>
           <div>
-            {todoList.map(todo => (
-              <div className="flex mb-4 items-center">
-                <p className="w-full text-gray-900">{todo.text}</p>
-                <button
-                  type="button"
-                  onClick={() => this.completeTodo(todo.id)}
-                  className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green-900 border-green-900 hover:bg-green-900">
-                  {todo.isDone ? 'Not Done' : 'Done'}
-                </button>
-                <button
-                  type="button"
-                  className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-900 border-red-900 hover:text-white hover:bg-red-900">
-                  Remove
-                </button>
-              </div>
-            ))}
+            {todoList
+              .filter(todo => {
+                switch (status) {
+                  case 'completed':
+                    return todo.isDone;
+                  case 'pending':
+                    return !todo.isDone;
+                  default:
+                    return true;
+                }
+              })
+              .map(todo => (
+                <div key={todo.id} className="flex mb-4 items-center">
+                  <p
+                    className={classnames('w-full text-gray-900', {
+                      'line-through': todo.isDone,
+                    })}>
+                    {todo.text}
+                  </p>
+                  <Button btnStyle="mr-2" onClick={() => this.onCompleteTodo(todo.id)}>
+                    {todo.isDone ? 'Not Done' : 'Done'}
+                  </Button>
+                  <Button onClick={() => this.deleteTodo(todo.id)}>Remove</Button>
+                </div>
+              ))}
+          </div>
+          <div>
+            <Button name="all" onClick={this.filter}>
+              All Todo
+            </Button>
+            <Button name="pending" onClick={this.filter}>
+              Pending Todo
+            </Button>
+            <Button name="completed" onClick={this.filter}>
+              Completed Todo
+            </Button>
           </div>
         </div>
       </div>
