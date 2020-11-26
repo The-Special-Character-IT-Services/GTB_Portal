@@ -12,15 +12,47 @@ export default class index extends PureComponent {
     error: '',
   };
 
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = async () => {
+    try {
+      const data = await fetch('http://localhost:3000/todoList');
+      const todoList = await data.json();
+      this.setState({
+        todoList,
+      });
+    } catch (error) {
+      this.setState({ error });
+    }
+  };
+
+  addData = async body => {
+    try {
+      const data = await fetch('http://localhost:3000/todoList', {
+        method: 'POST',
+        body,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+      const todoItem = await data.json();
+      const { todoList } = this.state;
+      this.setState({
+        todoList: [todoItem, ...todoList],
+      });
+    } catch (error) {
+      this.setState({ error });
+    }
+  };
+
   onAddTodo = (event, todoText) => {
     try {
       event.preventDefault();
-      const { todoList } = this.state;
       if (todoText) {
-        this.setState({
-          todoList: [{ text: todoText, isDone: false, id: new Date().valueOf() }, ...todoList],
-          status: 'all',
-        });
+        this.addData(JSON.stringify({ text: todoText, isDone: false }));
       } else {
         this.setState({
           error: 'Please add text',

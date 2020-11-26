@@ -1,0 +1,19 @@
+{
+  "todoList": [
+    {
+      "id": 1,
+      "text": "get milk",
+      "isDone": false
+    },
+    {
+      "text": "get food",
+      "isDone": true,
+      "id": 2
+    },
+    {
+      "text": "give training",
+      "isDone": false,
+      "id": 3
+    }
+  ]
+}
