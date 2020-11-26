@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+// import React, { memo } from 'react';
 
-const Child1 = ({ data }) => {
-  console.log('Child1');
-  return <div>{data.name}</div>;
-};
+// const Child1 = ({ data }) => {
+//   console.log('Child1');
+//   return <div>{data.name}</div>;
+// };
 
-export default memo(Child1);
+// export default memo(Child1);

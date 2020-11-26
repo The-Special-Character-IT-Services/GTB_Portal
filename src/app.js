@@ -5,7 +5,7 @@ const App = ({ ask, ans }) => (
   <div>
     <h1>{ask}</h1>
     <h1>{ans}</h1>
-    <input type='text' />
+    <input type="text" />
   </div>
 );
 
