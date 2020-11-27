@@ -122,7 +122,7 @@ export default class index extends PureComponent {
             onCompleteTodo={this.onCompleteTodo}
             deleteTodo={this.deleteTodo}
           />
-          <TodoFooter filter={this.filter} />
+          <TodoFooter filter={this.filter} status={status} />
         </div>
       </div>
     );
