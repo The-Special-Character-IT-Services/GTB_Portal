@@ -12,6 +12,9 @@ class Todo extends Component {
     todotext: '',
     error: '',
     status: 'all',
+    button: true,
+    button2: true,
+    button3: true,
   };
 
   deletetodo = id => {
@@ -65,6 +68,33 @@ class Todo extends Component {
     });
   };
 
+  handleClick1 = event => {
+    this.setState({
+      status: event.target.name,
+      button: false,
+      button2: true,
+      button3: true,
+    });
+  };
+
+  handleClick2 = event => {
+    this.setState({
+      status: event.target.name,
+      button2: false,
+      button: true,
+      button3: true,
+    });
+  };
+
+  handleClick3 = event => {
+    this.setState({
+      status: event.target.name,
+      button3: false,
+      button: true,
+      button2: true,
+    });
+  };
+
   filter = event => {
     this.setState({
       status: event.target.name,
@@ -86,7 +116,7 @@ class Todo extends Component {
   };
 
   render() {
-    const { todotext, error } = this.state;
+    const { todotext, error, button, button2, button3 } = this.state;
     return (
       <div className="h-screen w-full flex justify-center items-center bg-green-900 font-sans">
         <div className="bg-yellow-300 rounded shadow p-3 m-3 w-full lg:w-2/3 lg:max-lg">
@@ -122,7 +152,7 @@ class Todo extends Component {
                 <button
                   type="button"
                   onClick={() => this.completeTodo(todo.id)}
-                  className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded-hover: bg-green-400 text-green-900 border-green-900 hover:text-white hover:bg-green-900">
+                  className="flex p-2 ml-2 mr-1 border-2 rounded-hover: bg-green-400 text-green-900 border-green-900 hover:text-white hover:bg-green-900">
                   {todo.isDone ? 'not done' : 'done'}
                 </button>
                 <button
@@ -137,22 +167,34 @@ class Todo extends Component {
               <button
                 type="text"
                 name="all"
-                onClick={this.filter}
-                className="flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900 ">
+                onClick={this.handleClick1}
+                className={
+                  button
+                    ? 'button2true flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
+                    : 'button2false flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                }>
                 All to do
               </button>
               <button
                 type="text"
                 name="pending"
-                onClick={this.filter}
-                className="flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900 ">
+                onClick={this.handleClick2}
+                className={
+                  button2
+                    ? 'buttontrue flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
+                    : 'buttonfalse flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                }>
                 Pending todo
               </button>
               <button
                 type="text"
                 name="completed"
-                onClick={this.filter}
-                className="flex-no-shrink p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900 ">
+                onClick={this.handleClick3}
+                className={
+                  button3
+                    ? 'button3true flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
+                    : 'button3false flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                }>
                 Completed todo
               </button>
             </div>
@@ -162,5 +204,6 @@ class Todo extends Component {
     );
   }
 }
+
 // Todo.propTypes = {};
 export default Todo;
