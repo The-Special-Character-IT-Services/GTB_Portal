@@ -11,10 +11,43 @@ class Todo extends Component {
     todolist: [],
     todotext: '',
     error: '',
-    status: 'all',
-    button: true,
-    button2: true,
-    button3: true,
+    status: '',
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = async () => {
+    try {
+      const data = await fetch('http://localhost:3000/todolist');
+      const todolist = await data.json();
+      this.setState({
+        todolist,
+      });
+    } catch (error) {
+      this.setState({ error });
+    }
+  };
+
+  addData = async body => {
+    try {
+      const data = await fetch('http://localhost:3000/todolist', {
+        method: 'POST',
+        body,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+      const todoitem = await data.json();
+      const { todolist } = this.state;
+      this.setState({
+        todolist: [todoitem, ...todolist],
+      });
+    } catch (error) {
+      this.setState({ error });
+    }
   };
 
   deletetodo = id => {
@@ -35,10 +68,11 @@ class Todo extends Component {
 
   onaddtodo = event => {
     event.preventDefault();
-    const { todolist, todotext } = this.state;
+    const { todotext } = this.state;
     if (todotext) {
+      this.addData(JSON.stringify({ text: todotext, isDone: false }));
       this.setState({
-        todolist: [...todolist, { text: todotext, isDone: false, id: new Date().valueOf() }],
+        // todolist: [...todolist, { text: todotext, isDone: false, id: new Date().valueOf() }],
         todotext: '',
         error: '',
         status: 'all',
@@ -68,33 +102,6 @@ class Todo extends Component {
     });
   };
 
-  handleClick1 = event => {
-    this.setState({
-      status: event.target.name,
-      button: false,
-      button2: true,
-      button3: true,
-    });
-  };
-
-  handleClick2 = event => {
-    this.setState({
-      status: event.target.name,
-      button2: false,
-      button: true,
-      button3: true,
-    });
-  };
-
-  handleClick3 = event => {
-    this.setState({
-      status: event.target.name,
-      button3: false,
-      button: true,
-      button2: true,
-    });
-  };
-
   filter = event => {
     this.setState({
       status: event.target.name,
@@ -116,10 +123,10 @@ class Todo extends Component {
   };
 
   render() {
-    const { todotext, error, button, button2, button3 } = this.state;
+    const { todotext, error, status } = this.state;
     return (
       <div className="h-screen w-full flex justify-center items-center bg-green-900 font-sans">
-        <div className="bg-yellow-300 rounded shadow p-3 m-3 w-full lg:w-2/3 lg:max-lg">
+        <div className="bg-yellow-300 rounded shadow p-3 m-3 w-full lg:w-1/2 lg:max-lg">
           <div className="mb-4">
             <h1 className="text-black">Todo list</h1>
             {/* <form className='flex mt-4' onSubmit={this.onSubmit}>
@@ -142,7 +149,7 @@ class Todo extends Component {
           <div>{error}</div>
           <div>
             {this.filteredData().map(todo => (
-              <div className="flex mb-4 items-center">
+              <div key={todo.id} className="flex mb-4 items-center">
                 <p
                   className={classnames('w-full text-gray-900', {
                     'line-through': todo.isDone,
@@ -167,33 +174,33 @@ class Todo extends Component {
               <button
                 type="text"
                 name="all"
-                onClick={this.handleClick1}
+                onClick={this.filter}
                 className={
-                  button
-                    ? 'button2true flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
-                    : 'button2false flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                  status === 'all'
+                    ? 'flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                    : 'flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
                 }>
                 All to do
               </button>
               <button
                 type="text"
                 name="pending"
-                onClick={this.handleClick2}
+                onClick={this.filter}
                 className={
-                  button2
-                    ? 'buttontrue flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
-                    : 'buttonfalse flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                  status === 'pending'
+                    ? 'flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                    : 'flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
                 }>
                 Pending todo
               </button>
               <button
                 type="text"
                 name="completed"
-                onClick={this.handleClick3}
+                onClick={this.filter}
                 className={
-                  button3
-                    ? 'button3true flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
-                    : 'button3false flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                  status === 'completed'
+                    ? 'flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-teal-900 text-white border-teal-900'
+                    : 'flex-no-shrink mr-4 p-2 border-2 rounded  w-1/4 bg-blue-300 text-teal-900 border-teal-900 hover:text-white hover:bg-teal-900'
                 }>
                 Completed todo
               </button>

@@ -1,13 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/extensions */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Todo from './Todo/Todo';
-import './index.css';
 import './tailwind.css';
-// import ClassApp from './ClassApp';
+import './index.css';
 
-ReactDOM.render(
-  // <ClassApp ask='how are you' ans='i am all okay' />,
-  <Todo />,
-  document.getElementById('root'),
-);
+ReactDOM.render(<Todo />, document.getElementById('root'));
