@@ -84,29 +84,30 @@ export default class ClassApp extends Component {
     return 5;
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  // componentDidUpdate(prevProps, prevState, snapshot) {}\
+
+  static getDerivedStateFromError() {
+    return {};
+  }
+
+  // componentDidCatch(error, info) {
+  //   // save on serve
+  //   logComponentStackToMyService(info.componentStack);
+  // }
 
   componentWillUnmount() {
     document.removeEventListener('copy');
     clearTimeout(this.timer);
   }
 
-  static getDerivedStateFromError(error) {
-    return {};
-  }
-
-  componentDidCatch(error, info) {
-    // save on serve
-    logComponentStackToMyService(info.componentStack);
-  }
-
   onPress = () => {
-    this.state.user2.lastname = 'Clerk';
+    const { user2 } = this.state;
+    user2.lastname = 'Clerk';
     this.setState({
       // immutably done
       user: { ...this.user, firstname: 'Micheal' },
       // mutably done
-      user2: this.state.user2,
+      user2: user2.lastname,
     });
     // this.setState({
     //   string: 'S0 changed',
@@ -123,14 +124,14 @@ export default class ClassApp extends Component {
 
   render() {
     console.log('In Render');
-    const { greet, message } = this.props;
+    // const { greet, message } = this.props;
     const { string, string1, textvalue, myname, user, user2 } = this.state;
     return (
       <div>
-        {/* <h1>{string}</h1>
+        <h1>{string}</h1>
         <h1>{string1}</h1>
         <h1>{myname}</h1>
-        <h1
+        {/* <h1
           style={{
             color: 'red',
             backgroundColor: 'blue',
@@ -158,7 +159,7 @@ export default class ClassApp extends Component {
         <br />
         Password
         <input type="Password" />
-        <button type="button"> Don't Click me </button>
+        <button type="button"> Do not Click me </button>
       </div>
     );
   }

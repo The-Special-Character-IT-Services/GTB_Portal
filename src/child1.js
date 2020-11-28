@@ -3,8 +3,6 @@ import React, { PureComponent } from 'react';
 
 class child1 extends PureComponent {
   render() {
-    console.log('====================================');
-    console.log('child 1');
     return <div>child1</div>;
   }
 }
