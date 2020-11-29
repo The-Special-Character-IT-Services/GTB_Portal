@@ -39,7 +39,7 @@ const Todolist = ({ todolist, status, onCompleteTodo, deleteTodo }) => {
             {todo.text}
           </p>
           <Button
-            btnStyle="mr-2 mb-4 text-green-600 border-green-600 hover:text-white hover:bg-green-600 "
+            btnStyle="mr-2 mb-4 text-green-600 border-green-600 hover:text-white hover:bg-green-600"
             onClick={() => onCompleteTodo(todo.id)}>
             {todo.isDone ? 'Not Done' : 'Done'}
           </Button>

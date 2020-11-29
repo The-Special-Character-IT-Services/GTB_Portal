@@ -4,8 +4,9 @@ import React, { memo } from 'react';
 const index = ({ ...rest }) => (
   <input
     {...rest}
+    placeholder="Enter text"
     style={{ borderRadius: '25px', outline: 'none' }}
-    className="rounded shadow border appearance-none text-gray-900 w-full py-2 px-2 mr-4 "
+    className=" hover:bg-yellow-100 rounded shadow border-2 appearance-none text-gray-900 w-full py-2 px-2 mr-4 "
   />
 );
 

@@ -36,7 +36,11 @@ export default class Todoform extends PureComponent {
         </h1>
         <form className="flex mt-4" onSubmit={this.onSubmit}>
           <Textinput value={todotext} onChange={this.onChangetext} />
-          <Button type="submit">Add Task</Button>
+          <Button
+            type="submit"
+            btnStyle="text-yellow-600 border-yellow-600 hover:text-white hover:bg-yellow-600">
+            Add Task
+          </Button>
         </form>
       </div>
     );

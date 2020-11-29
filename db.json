@@ -1,54 +1,29 @@
 {
   "todolist": [
     {
-      "id": 1,
-      "text": "get laptop",
-      "isDone": false
+      "text": "free run",
+      "isDone": false,
+      "id": 1
     },
     {
-      "id": 2,
-      "text": "my desk",
-      "isDone": true
+      "text": "Luxury",
+      "isDone": false,
+      "id": 2
     },
     {
-      "text": "adhgvdj",
+      "text": "dadasdasd",
       "isDone": false,
       "id": 3
     },
     {
-      "text": "adhgvdjackjabkjc",
+      "text": "shdvfsjhfvjsfs\\",
       "isDone": false,
       "id": 4
     },
     {
-      "text": "basdma",
+      "text": "dfdfsfsd",
       "isDone": false,
       "id": 5
-    },
-    {
-      "text": "ladk",
-      "isDone": false,
-      "id": 6
-    },
-    {
-      "text": "hegfqf",
-      "isDone": false,
-      "id": 7
-    },
-    {
-      "text": "qefuohqiufq",
-      "isDone": false,
-      "id": 8
-    },
-    {
-      "text": "wofhadk",
-      "isDone": false,
-      "id": 9
-    },
-    {
-      "text": "qkfjqakjfa",
-      "isDone": false,
-      "id": 10
     }
   ]
 }

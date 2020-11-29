@@ -31,13 +31,52 @@ export default class todo extends PureComponent {
     error: '',
   };
 
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = async () => {
+    try {
+      const data = await fetch('http://localhost:3000/todolist');
+      const todolist = await data.json();
+      this.setState({
+        todolist,
+      });
+    } catch (error) {
+      this.setState({
+        error: error.message,
+      });
+    }
+  };
+
+  addData = async body => {
+    try {
+      const data = await fetch('http://localhost:3000/todolist', {
+        method: 'POST',
+        body,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+      const todoItem = await data.json();
+      const { todolist } = this.state;
+      this.setState({
+        todolist: [todoItem, ...todolist],
+      });
+    } catch (error) {
+      this.setState({
+        error: error.message,
+      });
+    }
+  };
+
   onAddTodo = (event, todotext) => {
-    const { todolist } = this.state;
     try {
       event.preventDefault();
       if (todotext) {
+        this.addData(JSON.stringify({ text: todotext, isDone: false }));
         this.setState({
-          todolist: [...todolist, { text: todotext, isDone: false, id: new Date().valueOf() }],
           error: '',
         });
       } else {
@@ -70,10 +109,35 @@ export default class todo extends PureComponent {
     }
   };
 
+  // deleteData = async body => {
+  //   try {
+  //     const data = await fetch('http://localhost:3000/todolist', {
+  //       method: 'DELETE',
+  //       body,
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Accept: 'application/json',
+  //       },
+  //     });
+  //     const todoItem = await data.json();
+  //     const { todolist } = this.state;
+  //     this.setState({
+  //       todolist: [todoItem, ...todolist],
+  //     });
+  //   } catch (error) {
+  //     this.setState({
+  //       error: error.message,
+  //     });
+  //   }
+  // };
+
   deleteTodo = id => {
     try {
       const { todolist } = this.state;
       const i = todolist.findIndex(x => x.id === id);
+      // this.deleteData(
+      //   JSON.stringify({ todolist: [...todolist.slice(0, i), ...todolist.slice(i + 1)] }),
+      // );
       this.setState({
         todolist: [...todolist.slice(0, i), ...todolist.slice(i + 1)],
       });

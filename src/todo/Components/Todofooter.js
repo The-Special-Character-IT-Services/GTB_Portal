@@ -30,6 +30,4 @@ Todofooter.propTypes = {
   filter: PropTypes.func.isRequired,
 };
 
-Todofooter.propTypes = {};
-
 export default memo(Todofooter);
