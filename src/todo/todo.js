@@ -102,7 +102,7 @@ export default class todo extends PureComponent {
       <div className=" h-screen w-full flex justify-center items-center font-sans bg-green-400 ">
         <div
           style={{ borderRadius: '25px' }}
-          className="bg-white m-4 rounded shadow p-6 w-full lg:w-1/2 lg:max-w-lg ">
+          className="bg-white m-4 rounded shadow p-6 w-full lg:w-1/2 ">
           <Todoform onAddTodo={this.onAddTodo} />
           {error && <div>{error}</div>}
           <Todolist
