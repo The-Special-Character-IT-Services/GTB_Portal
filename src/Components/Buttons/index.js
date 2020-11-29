@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 const index = ({ children, btnStyle, type, ...rest }) => (
   <button
     type={type}
     {...rest}
-    className={classnames('flex-no-shrink p-2 border-2 rounded mr-2 ml-2 px-2  w-1/4', btnStyle, {
+    style={{ borderRadius: '25px', outline: 'none' }}
+    className={classnames('flex-no-shrink p-2 mr-2 rounded border-2 w-1/4', btnStyle, {
       'text-purple-700 border-purple-700 hover:text-white hover:bg-purple-700': !btnStyle,
     })}>
     {children}
