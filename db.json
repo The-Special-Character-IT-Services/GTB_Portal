@@ -1,0 +1,19 @@
+{
+  "todoList": [
+    {
+      "text": "India",
+      "isDone": false,
+      "id": 1
+    },
+    {
+      "text": "Aus",
+      "isDone": false,
+      "id": 2
+    },
+    {
+      "text": "Can",
+      "isDone": false,
+      "id": 3
+    }
+  ]
+}
