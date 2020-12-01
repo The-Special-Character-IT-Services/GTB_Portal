@@ -4,6 +4,7 @@ export default class index extends PureComponent {
   state = {
     textTodo: '',
     todoList: [],
+    status: 'all',
   };
 
   onChangeText = event => {
@@ -42,8 +43,28 @@ export default class index extends PureComponent {
     });
   };
 
+  filter = event => {
+    this.setState({
+      status: event.target.name,
+    });
+  };
+
+  filteredData = () => {
+    const { todoList, status } = this.state;
+    return todoList.filter(todo => {
+      switch (status) {
+        case 'Completed':
+          return todo.isDone;
+        case 'Pending':
+          return !todo.isDone;
+        default:
+          return true;
+      }
+    });
+  };
+
   render() {
-    const { textTodo, todoList } = this.state;
+    const { textTodo, status } = this.state;
     return (
       <div>
         <h1>To-Do List</h1>
@@ -52,7 +73,7 @@ export default class index extends PureComponent {
           <button type="submit">SUBMIT</button>
         </form>
         <div>
-          {todoList.map(item => (
+          {this.filteredData().map(item => (
             <div key={item.id}>
               <span>{item.textTodo}</span>
               <button onClick={() => this.onCompleteTodo(item.id)}>
@@ -61,6 +82,29 @@ export default class index extends PureComponent {
               <button onClick={() => this.deleteTodo(item.id)}>Remove</button>
             </div>
           ))}
+        </div>
+        <div>
+          <button
+            style={{ backgroundColor: status === 'all' ? 'red' : 'blue' }}
+            type="button"
+            name="all"
+            onClick={this.filter}>
+            All Task
+          </button>
+          <button
+            style={{ backgroundColor: status === 'Pending' ? 'red' : 'blue' }}
+            type="button"
+            name="Pending"
+            onClick={this.filter}>
+            Pending Task
+          </button>
+          <button
+            style={{ backgroundColor: status === 'Completed' ? 'red' : 'blue' }}
+            type="button"
+            name="Completed"
+            onClick={this.filter}>
+            Completed task
+          </button>
         </div>
       </div>
     );
