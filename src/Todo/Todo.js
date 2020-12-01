@@ -4,8 +4,6 @@ import Todoform from './Components/Todoform';
 import Todolist from './Components/Todolist';
 
 export default class Todo extends PureComponent {
-  static propTypes = {};
-
   state = {
     error: '',
     todolist: [],

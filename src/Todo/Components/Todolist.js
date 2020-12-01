@@ -48,7 +48,7 @@ const Todolist = ({ todolist, status, onCompleteTodo, deletetodo }) => {
             {todo.isDone ? 'not done' : 'done'}
           </Button>
           <Button
-            btnStyle="  text-red-900 mr-2 mb-4 border-red-900 hover:text-white hover:bg-red-900"
+            btnStyle="text-red-900 mr-2 mb-4 border-red-900 hover:text-white hover:bg-red-900"
             onClick={() => deletetodo(todo.id)}>
             Remove
           </Button>
